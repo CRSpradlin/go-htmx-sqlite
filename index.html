@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX & Go - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
+</head>
+<body class="w-full h-full flex">
+    <div class="w-full h-full flex flex-row">
+        <div id="todos-list" class="w-full h-full flex flex-col">
+            {{ range .ToDos }}
+                {{ block "todos-item" .}}
+                    <div>{{ .Title }}: {{ .Description }}</div>
+                {{ end }}
+            {{ end }}
+        </div>
+        <div class="w-full h-full flex flex-col">
+            <span>Add ToDo</span>
+            <form hx-post="/add/" hx-target="#todos-list" hx-swap="beforeend" hx-on::after-request="this.form.reset()">
+                <label>Title</label>
+                <input name="title" type="text" />
+                <label>Description</label>
+                <input name="description" type="text" />
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
