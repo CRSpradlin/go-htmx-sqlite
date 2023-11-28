@@ -69,7 +69,7 @@ func addToDo(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	var err error // error is scoped locally so that "=" can be used in the following line instead of ":=" which would overrride global "db"
-	db, err = sql.Open("sqlite3", "./sqlite.db")
+	db, err = sql.Open("sqlite3", "./db.sqlite")
 	checkErr(err)
 	defer db.Close()
 
