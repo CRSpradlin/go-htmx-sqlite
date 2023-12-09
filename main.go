@@ -85,7 +85,7 @@ func main() {
 	checkErr(err)
 
 	http.HandleFunc("/", rootHandler)
-	http.HandleFunc("/add/", addToDo)
+	http.HandleFunc("/add", addToDo)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
